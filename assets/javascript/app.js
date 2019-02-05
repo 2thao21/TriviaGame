@@ -49,7 +49,7 @@ var timer;
 
 function timerRunsOut(){
     timesUp++;
-    gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timeDisplay'>" + timeCounterStart + "</span></p>" + "<p class='text-center'>You ran out of time!  The correct answer was: " + correctAns[questionCounter] + "</p>";
+    gameHTML = "<h4 class='text-center timer-p'>Time Remaining: <span class='timeDisplay'>" + timeCounterStart + "</span></h4>" + "<p class='text-center'>You ran out of time!  The correct answer was: " + correctAns[questionCounter] + "</p>";
 	$(".gameArea").html(gameHTML);
     setTimeout(wait, 2500);
     
@@ -58,20 +58,25 @@ function timerRunsOut(){
 
 function youWereCorrect(){
     wins++;
-    gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timeDisplay'>" + timeCounterStart + "</span></p>" + "<p class='text-center'>Correct! The answer is: " + correctAns[questionCounter] + "</p>";
+    gameHTML = "<h4 class='text-center timer-p'>Time Remaining: <span class='timeDisplay'>" + timeCounterStart + "</span></h4>" + "<p class='text-center'>Correct! The answer is: " + correctAns[questionCounter] + "</p>";
 	$(".gameArea").html(gameHTML);
 	setTimeout(wait, 2500);
 }
 
 function youWereWrong(){
     losses++;
-    gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timeDisplay'>" + timeCounterStart + "</span></p>" + "<p class='text-center'>Wrong! The correct answer is: "+ correctAns[questionCounter] + "</p>";
+    gameHTML = "<h4 class='text-center timer-p'>Time Remaining: <span class='timeDisplay'>" + timeCounterStart + "</span></h4>" + "<p class='text-center'>Wrong! The correct answer is: "+ correctAns[questionCounter] + "</p>";
 	$(".gameArea").html(gameHTML);
 	setTimeout(wait, 2500);
 }
 
 function generateHTML(){
-    gameHTML = "<h4 class='text-center timer-p'>Time Remaining: <span class='timeDisplay'>25</span></h4><p class='text-center'>" + triviaQuestions[questionCounter] + "</p><p class='first-answer answer'>" + possibleAnswers[questionCounter][0] + "</p><p class='answer'>"+possibleAnswers[questionCounter][1]+"</p><p class='answer'>"+possibleAnswers[questionCounter][2]+"</p><p class='answer'>"+possibleAnswers[questionCounter][3]+"</p>";
+    gameHTML = "<h4 class='text-center timer-p'>Time Remaining: <span class='timeDisplay'>25</span></h4><p class='text-center'>" + triviaQuestions[questionCounter] 
+    + "</p><p class='first-answer answer'>" + possibleAnswers[questionCounter][0] 
+    + "</p><p class='answer'>"+possibleAnswers[questionCounter][1]
+    + "</p><p class='answer'>"+possibleAnswers[questionCounter][2]
+    + "</p><p class='answer'>"+possibleAnswers[questionCounter][3]+"</p>";
+
 	$(".gameArea").html(gameHTML);
 }
 
@@ -80,14 +85,14 @@ function wait(){
         questionCounter++;
         generateHTML();
         timeCounterStart = 25;
-        timerWrapper();
+        countDownLoop();
     }
     else{
         finalScreen();
     }
 }
 
-function timerWrapper(){
+function countDownLoop(){
     timer = setInterval(twentyFiveSeconds, 1000);
     function twentyFiveSeconds(){
         if (timeCounterStart === 0){
@@ -102,7 +107,14 @@ function timerWrapper(){
 }
 
 function finalScreen(){
-    gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timeDisplay'>" + timeCounterStart + "</span></p>" + "<p class='text-center'>All done, here's how you did!" + "</p>" + "<p class='summary-correct'>Correct Answers: " + wins + "</p>" + "<p>Wrong Answers: " + losses + "</p>" + "<p>Unanswered: " + timesUp + "</p>" + "<p class='text-center reset-button-container'><a class='btn btn-primary btn-lg btn-block reset-button' href='#' role='button'>Reset The Quiz!</a></p>";
+    gameHTML = "<h4 class='text-center timer-p'>Time Remaining: <span class='timeDisplay'>" 
+    + timeCounterStart + "</span></h4>" 
+    + "<h5 class='text-center'>Finished! Let's see how you did!" + "</h5>" 
+    + "<p class='summary-correct'>Correct Answers: " + wins + "</p>" 
+    + "<p>Wrong Answers: " + losses + "</p>" 
+    + "<p>Time ran out, unanswered: " + timesUp + "</p>" 
+    + "<p class='text-center reset-button-container'><a class='btn btn-danger btn-lg btn-block reset-button' href='#' role='button'>Play Again</a></p>";
+    
     $(".gameArea").html(gameHTML);
         // if (wins > 7){
         //     gameHTML = 
@@ -116,14 +128,14 @@ function resetGame(){
     timesUp = 0;
     timeCounterStart = 25;
     generateHTML();
-    timerWrapper();
+    countDownLoop();
 }
 
 $(document).ready(function(){
 
 //creating start button and initial screen before game
 function initialScreen(){
-    startScreen = "<p class='text-center main-button-container'><a class='btn btn-primary btn-lg btn-block start-button' href='#' role='button'>Start Game</a></p>";
+    startScreen = "<p class='text-center main-button-container'><a class='btn btn-warning btn-lg btn-block start-button' href='#' role='button'>Start Game</a></p>";
     $(".gameArea").html(startScreen);
 }
     initialScreen();
@@ -132,7 +144,7 @@ function initialScreen(){
 $("body").on("click",".start-button", function(event){
     generateHTML();
 
-    timerWrapper();
+    countDownLoop();
     
 });
 
@@ -154,3 +166,4 @@ $("body").on("click", ".reset-button", function(event){
     
 });
 
+// Would have loved to add more to make the game more interested. Ran out of time.
