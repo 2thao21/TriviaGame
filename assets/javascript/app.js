@@ -37,7 +37,7 @@ var correctAns=[
 
 var startScreen;
 var gameHTML;
-var timeCounterStart = 25; //25 seconds to select answer
+var timeCounterStart = 25; //25 second timer to select answer
 var wins = 0;
 var losses = 0;
 var timesUp = 0;
@@ -70,6 +70,7 @@ function youWereWrong(){
 	setTimeout(wait, 2500);
 }
 
+// creating game play html after start button has been clicked
 function generateHTML(){
     gameHTML = "<h4 class='text-center timer-p'>Time Remaining: <span class='timeDisplay'>25</span></h4><p class='text-center'>" + triviaQuestions[questionCounter] 
     + "</p><p class='first-answer answer'>" + possibleAnswers[questionCounter][0] 
@@ -80,6 +81,7 @@ function generateHTML(){
 	$(".gameArea").html(gameHTML);
 }
 
+// ingame counter to continue through all questions
 function wait(){
     if(questionCounter < 7){
         questionCounter++;
@@ -92,6 +94,7 @@ function wait(){
     }
 }
 
+// creating timer countdown from 25 secs to 0
 function countDownLoop(){
     timer = setInterval(twentyFiveSeconds, 1000);
     function twentyFiveSeconds(){
@@ -106,6 +109,7 @@ function countDownLoop(){
     }
 }
 
+// creating finalScreen to display results
 function finalScreen(){
     gameHTML = "<h4 class='text-center timer-p'>Time Remaining: <span class='timeDisplay'>" 
     + timeCounterStart + "</span></h4>" 
@@ -140,7 +144,7 @@ function initialScreen(){
 }
     initialScreen();
 
-//creating a function to create generateHTML(), that executes after pressing the start button and generates the game display
+//game action when start button is clicked, game starts as new html section in body is displayed.
 $("body").on("click",".start-button", function(event){
     generateHTML();
 
@@ -166,4 +170,4 @@ $("body").on("click", ".reset-button", function(event){
     
 });
 
-// Would have loved to add more to make the game more interested. Ran out of time.
+// Would have loved to add more to make the game more interesting. Didn't get to spend as much time as i would have liked.
