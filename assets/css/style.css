@@ -1,0 +1,26 @@
+body{
+    background: url(../images/moutains.jpg);
+    background-size: cover;
+    opacity: 0.9;
+}
+.container{
+    text-align: center;
+    background-color: blanchedalmond;
+    width: 60%;
+    /* height: fit-content; */
+    opacity: 0.9;
+    
+}
+
+/* section{
+    width: 65%;
+} */
+
+.pic{
+    height: 220px;
+    width:  280px;
+}
+
+.answer:hover{
+    background: forestgreen;
+}
